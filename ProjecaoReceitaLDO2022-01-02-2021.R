@@ -1,24 +1,24 @@
-#######Versão 26-02 com parametrização da RCL
-#######Versão 28-02 com ajustes nas receitas da Saúde. Depois tem que corrigir o num_ano, e o nome da receita base
-###Versão01-03: Com receita orçada
-#######Versão 12-03: Acrescentei 2020 a 2022
-########Versão 07-03: Acrescentei UGs (Para poder identificar os poderes)
-#Versão 25-03: Correção de receita patrimonial
-###Versão 15-03 Acrescentei Receita de capital
-###Versão 09-04: Valores constantes 2018
-#Versão 12-04: Acrescentado o campo com o Tipo da Fonte de Recursos (dígitos 3 e 4)
-#Versão 26/04: Escrever tabela no Boa Vista
-#Versão 12/02/2020: Retirei ITBI
-#Versão 13/02/2020: Ajustei as receitas patrimoniais não financeiras para que elas levem em consideração os primeiros meses de 2020
-#Versão 02/03/2020: Ajustei a FR 124
-#Versão 05/03/2020: Ajustei o link para o novo ambiente do BoaVista
-#Versão 17/03/2020: Relatório FOCUS 17/03
+#######Versï¿½o 26-02 com parametrizaï¿½ï¿½o da RCL
+#######Versï¿½o 28-02 com ajustes nas receitas da Saï¿½de. Depois tem que corrigir o num_ano, e o nome da receita base
+###Versï¿½o01-03: Com receita orï¿½ada
+#######Versï¿½o 12-03: Acrescentei 2020 a 2022
+########Versï¿½o 07-03: Acrescentei UGs (Para poder identificar os poderes)
+#Versï¿½o 25-03: Correï¿½ï¿½o de receita patrimonial
+###Versï¿½o 15-03 Acrescentei Receita de capital
+###Versï¿½o 09-04: Valores constantes 2018
+#Versï¿½o 12-04: Acrescentado o campo com o Tipo da Fonte de Recursos (dï¿½gitos 3 e 4)
+#Versï¿½o 26/04: Escrever tabela no Boa Vista
+#Versï¿½o 12/02/2020: Retirei ITBI
+#Versï¿½o 13/02/2020: Ajustei as receitas patrimoniais nï¿½o financeiras para que elas levem em consideraï¿½ï¿½o os primeiros meses de 2020
+#Versï¿½o 02/03/2020: Ajustei a FR 124
+#Versï¿½o 05/03/2020: Ajustei o link para o novo ambiente do BoaVista
+#Versï¿½o 17/03/2020: Relatï¿½rio FOCUS 17/03
 
-#Versão 19/03/2020: Tentando estimar impactos do COVID-19
+#Versï¿½o 19/03/2020: Tentando estimar impactos do COVID-19
 
-#Versões 2021: Deixar a parte de receita de alienações com input manual
+#Versï¿½es 2021: Deixar a parte de receita de alienaï¿½ï¿½es com input manual
 
-#Versão 30-03: Tentando modelar o impacto do Covid-19 sobre o emprego e receita da FR 120, como consequência. Mas isso só será incorporado na LOA 2021 e não na LDO
+#Versï¿½o 30-03: Tentando modelar o impacto do Covid-19 sobre o emprego e receita da FR 120, como consequï¿½ncia. Mas isso sï¿½ serï¿½ incorporado na LOA 2021 e nï¿½o na LDO
 
 library(RODBC)
 library(bizdays)
@@ -28,7 +28,7 @@ con <- odbcConnect("BoaVista",uid="bsinzato-sefaz",pwd="crisis",believeNRows=FAL
 
 
 ##################################
-#PARÂMETROS MACROECONÔMICOS
+#PARï¿½METROS MACROECONï¿½MICOS
 #####################################
 
 #https://www.valor.com.br/brasil/6135743/mercado-ve-inflacao-mais-baixa-em-2019-e-avanco-de-248-para-o-pib
@@ -38,18 +38,18 @@ con <- odbcConnect("BoaVista",uid="bsinzato-sefaz",pwd="crisis",believeNRows=FAL
 #http://www.automotivebusiness.com.br/noticia/30400/para-anfavea-vendas-serao-maiores-em-2020
 #https://valorinveste.globo.com/objetivo/de-olho-no-mercado/noticia/2020/01/07/anfavea-preve-crescimento-de-quase-10percent-nas-vendas-internas-de-veiculos-em-2020.ghtml
 
-#Relatório FOCUS 17-03-2020
+#Relatï¿½rio FOCUS 17-03-2020
 #https://www.infomoney.com.br/economia/jpmorgan-e-goldman-derrubam-projecao-do-pib-do-brasil-em-2020-e-veem-queda-de-ate-1-em-2020/
 
-#Centro de Macroeconomia Aplicada da Fundação Getúlio Vargas (FGV)
+#Centro de Macroeconomia Aplicada da Fundaï¿½ï¿½o Getï¿½lio Vargas (FGV)
 
-#Com informações FOCUS 23-03-2020
+#Com informaï¿½ï¿½es FOCUS 23-03-2020
 
 IPCA2020 <- 1+3.05/100
-PIB2020 <- 1+(0.02/100) #Cenário do Governo Federal em 23/03
+PIB2020 <- 1+(0.02/100) #Cenï¿½rio do Governo Federal em 23/03
 EF2020 <- 1+0.00
 CVFS2020 <- 1+0.05
-ANFAVEA2020 <- 0.97 #Substitui os dados da ANFAVEA de jan de 2020 pois estavam muito otimistas diante do quadro atual. Agora apenas considero desvalorização da frota atual
+ANFAVEA2020 <- 0.97 #Substitui os dados da ANFAVEA de jan de 2020 pois estavam muito otimistas diante do quadro atual. Agora apenas considero desvalorizaï¿½ï¿½o da frota atual
 
 IPCA2021 <- 1+0.0357
 PIB2021 <- 1+2.5/100
@@ -98,7 +98,7 @@ EfeitoCovid19Emprego2023 <- 1
 ###############################################
 
 ###################################################
-#PARÂMETROS DA DIRETORIA DA DÍVIDA E CAPTAÇÃO
+#PARï¿½METROS DA DIRETORIA DA Dï¿½VIDA E CAPTAï¿½ï¿½O
 ###############################################
 
 IngressosExternos2020 <- 37695571
@@ -115,13 +115,20 @@ IngressosInternos2023 <- 0
 
 #4.ICMS 
 string <- paste("
- SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
+ SELECT  
+ cod_unidade_gestora, cod_conta_contabil, 
+ cod_origem, cod_fonte_recurso, 
+ cod_detalhamento, nom_detalhamento, 
+ num_ano, 
+ (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, 
+ (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
+ 
  FROM
  dcog_share.fat_receita_orcamentaria_coedt 	
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento LIKE '%ICMS%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento LIKE '%ICMS%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dï¿½vida Ativa%'))
  AND (cod_conta_contabil NOT LIKE '%62131020201%') 
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -137,7 +144,7 @@ x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
 dataframe$nome_receita_ldo <- "4.ICMS"
-dataframe$memoria_calculo <- "Execução2019+PIB+IPCA+EF. Para 2021-2023 utilizado PIB+IPCA. EF igualado a zero."
+dataframe$memoria_calculo <- "Execuï¿½ï¿½o2019+PIB+IPCA+EF. Para 2021-2023 utilizado PIB+IPCA. EF igualado a zero."
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*(IPCA2020)*(PIB2020)*(EF2020)
 
@@ -160,7 +167,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento LIKE '%ITCMD%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento LIKE '%ITCMD%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dï¿½vida Ativa%'))
  AND (num_mes > 6)
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -185,7 +192,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento LIKE '%ITCMD%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento LIKE '%ITCMD%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dï¿½vida Ativa%'))
  AND num_mes < 2
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -204,7 +211,7 @@ dataframe <- rbind(dataframe,dataframe0)
 
 
 dataframe$nome_receita_ldo <- "3.ITCMD"
-dataframe$memoria_calculo <- "2º Semestre de 2019 x 2. Para 2021-2023 utilizado IPCA"
+dataframe$memoria_calculo <- "2ï¿½ Semestre de 2019 x 2. Para 2021-2023 utilizado IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*2
 
@@ -227,7 +234,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento LIKE '%IPVA%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento LIKE '%IPVA%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dï¿½vida Ativa%'))
  
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -243,7 +250,7 @@ x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
 dataframe$nome_receita_ldo <- "2.IPVA"
-dataframe$memoria_calculo <- "Dados da ANFAVEA. Para 2021-2023 PIB+IPCA+3%desvalorização"
+dataframe$memoria_calculo <- "Dados da ANFAVEA. Para 2021-2023 PIB+IPCA+3%desvalorizaï¿½ï¿½o"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*ANFAVEA2020
 
@@ -265,7 +272,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento LIKE '%Imposto sobre a Renda%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento LIKE '%Imposto sobre a Renda%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dï¿½vida Ativa%'))
  
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -281,7 +288,7 @@ x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
 dataframe$nome_receita_ldo <- "1.IRRF"
-dataframe$memoria_calculo <- "Crescimento vegetativo da folha de salários"
+dataframe$memoria_calculo <- "Crescimento vegetativo da folha de salï¿½rios"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*CVFS2020
 
@@ -304,7 +311,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento NOT LIKE '%ITBI%') AND (nom_detalhamento NOT LIKE '%ITCMD%') AND (nom_detalhamento NOT LIKE '%IPVA%') AND (nom_detalhamento NOT LIKE '%ICMS%') AND (nom_detalhamento NOT LIKE '%Imposto sobre a Renda%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento NOT LIKE '%ITBI%') AND (nom_detalhamento NOT LIKE '%ITCMD%') AND (nom_detalhamento NOT LIKE '%IPVA%') AND (nom_detalhamento NOT LIKE '%ICMS%') AND (nom_detalhamento NOT LIKE '%Imposto sobre a Renda%') AND (nom_detalhamento NOT LIKE '%Juro%') AND (nom_detalhamento NOT LIKE '%Multa%') AND (nom_detalhamento NOT LIKE '%Dï¿½vida Ativa%'))
  
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -334,7 +341,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#6.Outras Receitas tributárias
+#6.Outras Receitas tributï¿½rias
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -343,7 +350,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '11'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND ((nom_detalhamento LIKE '%Juro%') OR (nom_detalhamento LIKE '%Multa%') OR (nom_detalhamento LIKE '%Dívida Ativa%'))
+ AND ((nom_detalhamento LIKE '%Juro%') OR (nom_detalhamento LIKE '%Multa%') OR (nom_detalhamento LIKE '%Dï¿½vida Ativa%'))
  
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -358,8 +365,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "6.Outras receitas tributárias"
-dataframe$memoria_calculo <- "Receita executada de 2019+IPCA+PIB+Esforço Fiscal. Para 2021-2023 IPCA+PIB. EF igualado a zero"
+dataframe$nome_receita_ldo <- "6.Outras receitas tributï¿½rias"
+dataframe$memoria_calculo <- "Receita executada de 2019+IPCA+PIB+Esforï¿½o Fiscal. Para 2021-2023 IPCA+PIB. EF igualado a zero"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*EF2020*PIB2020
 
@@ -372,7 +379,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#7.Contribuições
+#7.Contribuiï¿½ï¿½es
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -394,8 +401,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "7.Contribuições"
-dataframe$memoria_calculo <- "Receita executada de 2019+CVFS-2% (A receita de contribuições tem crescido a uma taxa mais baixa que CVFS. Para 2021-2023 CVFS"
+dataframe$nome_receita_ldo <- "7.Contribuiï¿½ï¿½es"
+dataframe$memoria_calculo <- "Receita executada de 2019+CVFS-2% (A receita de contribuiï¿½ï¿½es tem crescido a uma taxa mais baixa que CVFS. Para 2021-2023 CVFS"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*(CVFS2020-0.02)
 
@@ -409,7 +416,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#8.Receita Patrimonial - Rendimento de aplicações financeiras
+#8.Receita Patrimonial - Rendimento de aplicaï¿½ï¿½es financeiras
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -418,7 +425,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '13'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND (nom_detalhamento LIKE '%Remuneração%')
+ AND (nom_detalhamento LIKE '%Remuneraï¿½ï¿½o%')
  
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -433,7 +440,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "8.Receita Patrimonial - Rendimento de aplicações financeiras"
+dataframe$nome_receita_ldo <- "8.Receita Patrimonial - Rendimento de aplicaï¿½ï¿½es financeiras"
 dataframe$memoria_calculo <- "Receita executada de 2019+IPCA+Aumento da SELIC. Para 2021-2023 IPCA+SELIC."
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -448,7 +455,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#9.Receita Patrimonial - Não financeiras
+#9.Receita Patrimonial - Nï¿½o financeiras
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -457,7 +464,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '13'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND (nom_detalhamento NOT LIKE '%Remuneração%')
+ AND (nom_detalhamento NOT LIKE '%Remuneraï¿½ï¿½o%')
  and num_mes < 2 
  and num_ano > 2019 
 
@@ -473,8 +480,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- " 9.Receita Patrimonial - Não financeiras"
-dataframe$memoria_calculo <- "Início de 2020 x 12. Para 2021-2023 IPCA."
+dataframe$nome_receita_ldo <- " 9.Receita Patrimonial - Nï¿½o financeiras"
+dataframe$memoria_calculo <- "Inï¿½cio de 2020 x 12. Para 2021-2023 IPCA."
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2020),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2020),]$receita_arrecadada_liquida*IPCA2020
 
@@ -486,21 +493,21 @@ receita <- rbind(receita,dataframe)
 
 #Verificar em qual natureza da receita elas se encaixam
 dataframe <- data.frame('cod_unidade_gestora'='520099','cod_conta_contabil'='62121000000','cod_origem'='16',
- 'cod_fonte_recurso'='0160000000','cod_detalhamento'='1360011101','nom_detalhamento'='Cessão Direito de Operacionalização da Folha Pagto de Pessoal -Adm. Direta -P. Executivo',
- 'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'=' 9.Receita Patrimonial - Não financeiras',
- 'memoria_calculo'='Informação Luiz sobre contrato BB',
+ 'cod_fonte_recurso'='0160000000','cod_detalhamento'='1360011101','nom_detalhamento'='Cessï¿½o Direito de Operacionalizaï¿½ï¿½o da Folha Pagto de Pessoal -Adm. Direta -P. Executivo',
+ 'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'=' 9.Receita Patrimonial - Nï¿½o financeiras',
+ 'memoria_calculo'='Informaï¿½ï¿½o Luiz sobre contrato BB',
  'projecao_receita_arrecadada_liquida2020'=12*(101055919.23/40),
  'projecao_receita_arrecadada_liquida2021'=12*(101055919.23/40),
  'projecao_receita_arrecadada_liquida2022'=12*(101055919.23/40),
- 'projecao_receita_arrecadada_liquida2023'=0*(101055919.23/40)  #Confirmar se em 2023 não teremos essa receita.
- ) #Retirei o marcador de ldo='N'. Depois tenho que verificar se não precisa colocar de volta
+ 'projecao_receita_arrecadada_liquida2023'=0*(101055919.23/40)  #Confirmar se em 2023 nï¿½o teremos essa receita.
+ ) #Retirei o marcador de ldo='N'. Depois tenho que verificar se nï¿½o precisa colocar de volta
 
 receita <- rbind(receita,dataframe)
 
 #############################################################################################################
 
 ###############################################
-#10. Receita Agropecuária
+#10. Receita Agropecuï¿½ria
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -523,7 +530,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- " 10. Receita Agropecuária"
+dataframe$nome_receita_ldo <- " 10. Receita Agropecuï¿½ria"
 dataframe$memoria_calculo <- "Receita executada de 2019+PIB+IPCA. Para 2021-2023 PIB+IPCA."
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*PIB2020
@@ -574,9 +581,9 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#12. Receita de Serviços (Versão II. Correção por CVFS para Contribuições. Correção por PIB+IPCA para os demais. Linha específica para SUS)
+#12. Receita de Serviï¿½os (Versï¿½o II. Correï¿½ï¿½o por CVFS para Contribuiï¿½ï¿½es. Correï¿½ï¿½o por PIB+IPCA para os demais. Linha especï¿½fica para SUS)
 
-#12.a Contribuição
+#12.a Contribuiï¿½ï¿½o
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -585,7 +592,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '16'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- and nom_detalhamento LIKE '%Contribuição%'
+ and nom_detalhamento LIKE '%Contribuiï¿½ï¿½o%'
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
  ")
@@ -599,8 +606,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "12. Receita de Serviços"
-dataframe$memoria_calculo <- "Para contribuições: CVFS. Para os demais PIB+IPCA"
+dataframe$nome_receita_ldo <- "12. Receita de Serviï¿½os"
+dataframe$memoria_calculo <- "Para contribuiï¿½ï¿½es: CVFS. Para os demais PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*CVFS2020
 
@@ -634,7 +641,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- 12*(x/5)
 
-##Inclusão do Orçamento
+##Inclusï¿½o do Orï¿½amento
 dataframe1 <- dataframe
 
 string <- paste("
@@ -662,10 +669,10 @@ x<-as.character(dataframe[,8])
 x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
-##Fim Inclusão do Orçamento
+##Fim Inclusï¿½o do Orï¿½amento
 
-dataframe$nome_receita_ldo <- "12. Receita de Serviços"
-dataframe$memoria_calculo <- "Para contribuições: CVFS. Para os demais PIB+IPCA"
+dataframe$nome_receita_ldo <- "12. Receita de Serviï¿½os"
+dataframe$memoria_calculo <- "Para contribuiï¿½ï¿½es: CVFS. Para os demais PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida
 
@@ -675,7 +682,7 @@ dataframe$projecao_receita_arrecadada_liquida2023 <- dataframe$projecao_receita_
 
 receita <- rbind(receita,dataframe)
 
-#12.c Demais que não são SUS nem Contribuição
+#12.c Demais que nï¿½o sï¿½o SUS nem Contribuiï¿½ï¿½o
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -684,7 +691,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '16'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- and nom_detalhamento NOT LIKE '%SUS%' and nom_detalhamento NOT LIKE '%Contribuição%'
+ and nom_detalhamento NOT LIKE '%SUS%' and nom_detalhamento NOT LIKE '%Contribuiï¿½ï¿½o%'
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
  ")
@@ -698,8 +705,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "12. Receita de Serviços"
-dataframe$memoria_calculo <- "Para contribuições: CVFS. Para os demais PIB+IPCA"
+dataframe$nome_receita_ldo <- "12. Receita de Serviï¿½os"
+dataframe$memoria_calculo <- "Para contribuiï¿½ï¿½es: CVFS. Para os demais PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*PIB2020
 
@@ -712,7 +719,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#13. Transferências Correntes - Cota-Parte do Fundo Participação Estado e DF
+#13. Transferï¿½ncias Correntes - Cota-Parte do Fundo Participaï¿½ï¿½o Estado e DF
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (SUM(val_receita_arrecadada) - SUM(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -721,7 +728,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '17'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- and nom_detalhamento LIKE '%Cota-Parte do Fundo de Participação%'
+ and nom_detalhamento LIKE '%Cota-Parte do Fundo de Participaï¿½ï¿½o%'
 
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -736,7 +743,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "13. Transferências Correntes - Cota-Parte do Fundo Participação Estado e DF "
+dataframe$nome_receita_ldo <- "13. Transferï¿½ncias Correntes - Cota-Parte do Fundo Participaï¿½ï¿½o Estado e DF "
 dataframe$memoria_calculo <- "Receita de 2019 corrigida por PIB+IPCA. Para 2021-2023 PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*PIB2020
@@ -751,7 +758,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#14. Transferências Correntes - Cota-Parte do IPI
+#14. Transferï¿½ncias Correntes - Cota-Parte do IPI
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -775,7 +782,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "14. Transferências Correntes - Cota-Parte do IPI"
+dataframe$nome_receita_ldo <- "14. Transferï¿½ncias Correntes - Cota-Parte do IPI"
 dataframe$memoria_calculo <- "Receita executada de 2019+PIB+IPCA. Para 2021-2023 PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*PIB2020
@@ -789,7 +796,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#15. Transferências Correntes - Outras Transferências da União - FEX (Aux. Fom.Export) Tesouro
+#15. Transferï¿½ncias Correntes - Outras Transferï¿½ncias da Uniï¿½o - FEX (Aux. Fom.Export) Tesouro
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -813,8 +820,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "15. Transferências Correntes - Outras Transferências da União - FEX (Aux. Fom.Export) Tesouro"
-dataframe$memoria_calculo <- "Legislação Federal - União interrompeu o envio da FEX"
+dataframe$nome_receita_ldo <- "15. Transferï¿½ncias Correntes - Outras Transferï¿½ncias da Uniï¿½o - FEX (Aux. Fom.Export) Tesouro"
+dataframe$memoria_calculo <- "Legislaï¿½ï¿½o Federal - Uniï¿½o interrompeu o envio da FEX"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- 0
 
@@ -828,7 +835,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#16. Transferências Correntes - Transf. Financeiras do ICMS - Desoneração - L.C. N. 87/96
+#16. Transferï¿½ncias Correntes - Transf. Financeiras do ICMS - Desoneraï¿½ï¿½o - L.C. N. 87/96
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (MAX(val_receita_arrecadada) - MAX(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -851,8 +858,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "16. Transferências Correntes - Transf. Financeiras do ICMS - Desoneração - L.C. N. 87/96"
-dataframe$memoria_calculo <- "Legislação Federal"
+dataframe$nome_receita_ldo <- "16. Transferï¿½ncias Correntes - Transf. Financeiras do ICMS - Desoneraï¿½ï¿½o - L.C. N. 87/96"
+dataframe$memoria_calculo <- "Legislaï¿½ï¿½o Federal"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*0
 
@@ -865,7 +872,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#17. Transferências Correntes - Outras Transferências Dir. Fundo Nacional do Desenv. da Educação - FNDE (Simplificado - Melhorar)
+#17. Transferï¿½ncias Correntes - Outras Transferï¿½ncias Dir. Fundo Nacional do Desenv. da Educaï¿½ï¿½o - FNDE (Simplificado - Melhorar)
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -888,7 +895,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-##Inclusão do Orçamento
+##Inclusï¿½o do Orï¿½amento
 dataframe1 <- dataframe
 
 string <- paste("
@@ -916,10 +923,10 @@ x<-as.character(dataframe[,8])
 x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
-##Fim Inclusão do Orçamento
+##Fim Inclusï¿½o do Orï¿½amento
 
-dataframe$nome_receita_ldo <- "17. Transferências Correntes - Outras Transferências Dir. Fundo Nacional do Desenv. da Educação - FNDE"
-dataframe$memoria_calculo <- "Fevereiro de 2020 vezes 10 apenas para a parte de alimentação (PNAE). A de obras foi zerada por falta de visibilidade na receita."
+dataframe$nome_receita_ldo <- "17. Transferï¿½ncias Correntes - Outras Transferï¿½ncias Dir. Fundo Nacional do Desenv. da Educaï¿½ï¿½o - FNDE"
+dataframe$memoria_calculo <- "Fevereiro de 2020 vezes 10 apenas para a parte de alimentaï¿½ï¿½o (PNAE). A de obras foi zerada por falta de visibilidade na receita."
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2020),]$projecao_receita_arrecadada_liquida2020 <- 10*dataframe[which(dataframe$num_ano==2020),]$receita_arrecadada_liquida
 
@@ -932,7 +939,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#18. Transferências Correntes - Transferências do Salário-Educação (Precisa melhorar)
+#18. Transferï¿½ncias Correntes - Transferï¿½ncias do Salï¿½rio-Educaï¿½ï¿½o (Precisa melhorar)
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -941,7 +948,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '17'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND nom_detalhamento LIKE '%Salário-Educação%'
+ AND nom_detalhamento LIKE '%Salï¿½rio-Educaï¿½ï¿½o%'
   
 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
@@ -955,7 +962,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "18. Transferências Correntes - Transferências do Salário-Educação"
+dataframe$nome_receita_ldo <- "18. Transferï¿½ncias Correntes - Transferï¿½ncias do Salï¿½rio-Educaï¿½ï¿½o"
 dataframe$memoria_calculo <- "receita de 2019 + IPCA. Para 2021-2023 IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*EfeitoCovid19Emprego2020 
@@ -969,7 +976,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#19. Transferências Correntes - Cota-Parte CIDE - Contrib. Intervenção no Domínio Econômico
+#19. Transferï¿½ncias Correntes - Cota-Parte CIDE - Contrib. Intervenï¿½ï¿½o no Domï¿½nio Econï¿½mico
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -991,7 +998,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "19. Transferências Correntes - Cota-Parte CIDE - Contrib. Intervenção no Domínio Econômico"
+dataframe$nome_receita_ldo <- "19. Transferï¿½ncias Correntes - Cota-Parte CIDE - Contrib. Intervenï¿½ï¿½o no Domï¿½nio Econï¿½mico"
 dataframe$memoria_calculo <- "Receita de 2019 corrigido pelo IPCA + PIB. Para 2021-2023 PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020*PIB2020
@@ -1005,7 +1012,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#20. Transferências Correntes - Transferências de Recursos do FUNDEB
+#20. Transferï¿½ncias Correntes - Transferï¿½ncias de Recursos do FUNDEB
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1028,8 +1035,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "20. Transferências Correntes - Transferências de Recursos do FUNDEB"
-dataframe$memoria_calculo <- "Receita de 2019+IPCA+PIB+EF+ previsão de que o coeficiente município/estado será estável nos próximos ano. Para 2021-2023 PIB+IPCA"
+dataframe$nome_receita_ldo <- "20. Transferï¿½ncias Correntes - Transferï¿½ncias de Recursos do FUNDEB"
+dataframe$memoria_calculo <- "Receita de 2019+IPCA+PIB+EF+ previsï¿½o de que o coeficiente municï¿½pio/estado serï¿½ estï¿½vel nos prï¿½ximos ano. Para 2021-2023 PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*PIB2020*IPCA2020*EF2020
 
@@ -1042,7 +1049,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#21. Transferências Correntes - Recursos da Saúde
+#21. Transferï¿½ncias Correntes - Recursos da Saï¿½de
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (SUM(val_receita_arrecadada) - SUM(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1068,8 +1075,8 @@ dataframe$receita_arrecadada_liquida <- x
 
 
 
-dataframe$nome_receita_ldo <- "21. Transferências Correntes - Recursos da Saúde"
-dataframe$memoria_calculo <- "Receita de 2019+PIB+IPCA. Para 2021-2023 PIB+IPCA"   #Conversei com a Alba e ela só atualiza os valores em maio para a LOA 2020
+dataframe$nome_receita_ldo <- "21. Transferï¿½ncias Correntes - Recursos da Saï¿½de"
+dataframe$memoria_calculo <- "Receita de 2019+PIB+IPCA. Para 2021-2023 PIB+IPCA"   #Conversei com a Alba e ela sï¿½ atualiza os valores em maio para a LOA 2020
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2020),]$projecao_receita_arrecadada_liquida2020 <- 12*dataframe[which(dataframe$num_ano==2020),]$receita_arrecadada_liquida*IPCA2020
 #dataframe$num_ano <- 2019
@@ -1083,7 +1090,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#22. Transferências Correntes - Convênios (transferências voluntárias)
+#22. Transferï¿½ncias Correntes - Convï¿½nios (transferï¿½ncias voluntï¿½rias)
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1106,7 +1113,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "22. Transferências Correntes - Convênios (transferências voluntárias)"
+dataframe$nome_receita_ldo <- "22. Transferï¿½ncias Correntes - Convï¿½nios (transferï¿½ncias voluntï¿½rias)"
 dataframe$memoria_calculo <- "Receita de 2019+IPCA. Para 2021-2023 IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -1121,7 +1128,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#23. Transferências Correntes - Outras Transferências
+#23. Transferï¿½ncias Correntes - Outras Transferï¿½ncias
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1131,7 +1138,7 @@ string <- paste("
  cod_origem LIKE '17'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
  AND ((cod_fonte_recurso NOT LIKE '0128%') AND (cod_fonte_recurso NOT LIKE '0228%') AND (cod_fonte_recurso NOT LIKE '0223%'))
- AND (nom_detalhamento NOT LIKE '%FUNDEB%' AND nom_detalhamento NOT LIKE '%CIDE%' AND nom_detalhamento NOT LIKE '%Salário-Educação%' AND nom_detalhamento NOT LIKE '%Salário-Educação%' AND nom_detalhamento NOT LIKE '%FNDE%' AND nom_detalhamento NOT LIKE '%87/96%' AND nom_detalhamento NOT LIKE '%FEX%' AND nom_detalhamento NOT LIKE '%IPI%' AND nom_detalhamento NOT LIKE '%Cota-Parte do Fundo de Participação%' AND nom_detalhamento NOT LIKE '%12.276%')
+ AND (nom_detalhamento NOT LIKE '%FUNDEB%' AND nom_detalhamento NOT LIKE '%CIDE%' AND nom_detalhamento NOT LIKE '%Salï¿½rio-Educaï¿½ï¿½o%' AND nom_detalhamento NOT LIKE '%Salï¿½rio-Educaï¿½ï¿½o%' AND nom_detalhamento NOT LIKE '%FNDE%' AND nom_detalhamento NOT LIKE '%87/96%' AND nom_detalhamento NOT LIKE '%FEX%' AND nom_detalhamento NOT LIKE '%IPI%' AND nom_detalhamento NOT LIKE '%Cota-Parte do Fundo de Participaï¿½ï¿½o%' AND nom_detalhamento NOT LIKE '%12.276%')
 
   
 
@@ -1146,7 +1153,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "23. Transferências Correntes - Outras Transferências"
+dataframe$nome_receita_ldo <- "23. Transferï¿½ncias Correntes - Outras Transferï¿½ncias"
 dataframe$memoria_calculo <- "Receita de 2019+IPCA. Para 2021-2023 IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -1170,12 +1177,12 @@ string <- paste("
  WHERE
  cod_origem LIKE '19'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND (nom_detalhamento NOT LIKE '%Recuperação%' AND nom_detalhamento NOT LIKE '%Restituições de Convênios%' AND nom_detalhamento NOT LIKE '%PRODEC%')
+ AND (nom_detalhamento NOT LIKE '%Recuperaï¿½ï¿½o%' AND nom_detalhamento NOT LIKE '%Restituiï¿½ï¿½es de Convï¿½nios%' AND nom_detalhamento NOT LIKE '%PRODEC%')
  
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
  ")
 
-#Lembrando que os acréscimos contratuais do PRODEC são inseridos depois
+#Lembrando que os acrï¿½scimos contratuais do PRODEC sï¿½o inseridos depois
 
 # Query the database and put the results into the data frame "dataframe"
  dataframe <- sqlQuery(con, string, as.is=T)
@@ -1202,11 +1209,11 @@ receita$ldo <- "S"
 
 
 #########################################
-#RECEITAS INTRAORÇAMENTÁRIAS
+#RECEITAS INTRAORï¿½AMENTï¿½RIAS
 #########################################
 
 ###############################################
-#30. Receitas intra-orçamentárias de contribuições
+#30. Receitas intra-orï¿½amentï¿½rias de contribuiï¿½ï¿½es
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1228,7 +1235,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "30. Receitas intra-orçamentárias de contribuições"
+dataframe$nome_receita_ldo <- "30. Receitas intra-orï¿½amentï¿½rias de contribuiï¿½ï¿½es"
 dataframe$memoria_calculo <- "13 vezes receita de janeiro para 2020. Para 2021-2023 CVFS"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2020),]$projecao_receita_arrecadada_liquida2020 <- 13*dataframe[which(dataframe$num_ano==2020),]$receita_arrecadada_liquida
@@ -1244,7 +1251,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#31. Receitas intra-orçamentárias patrimoniais
+#31. Receitas intra-orï¿½amentï¿½rias patrimoniais
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1266,7 +1273,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "31. Receitas intra-orçamentárias patrimoniais"
+dataframe$nome_receita_ldo <- "31. Receitas intra-orï¿½amentï¿½rias patrimoniais"
 dataframe$memoria_calculo <- "Receita de 2019+IPCA. Para 2021-2023 IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -1282,7 +1289,7 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 ###############################################
-#32. Receitas intra-orçamentárias de serviços
+#32. Receitas intra-orï¿½amentï¿½rias de serviï¿½os
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1303,7 +1310,7 @@ string <- paste("
 x<-as.character(dataframe[,8])
 x <- gsub(",",".",x)
 x <- as.numeric(x)
-dataframe$receita_arrecadada_liquida <- x/5  #Divisão por 5 (5 meses entre janeiro e julho)
+dataframe$receita_arrecadada_liquida <- x/5  #Divisï¿½o por 5 (5 meses entre janeiro e julho)
 
 dataframe1<-dataframe
 
@@ -1332,7 +1339,7 @@ x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
 
-dataframe$nome_receita_ldo <- "32. Receitas intra-orçamentárias de serviços"
+dataframe$nome_receita_ldo <- "32. Receitas intra-orï¿½amentï¿½rias de serviï¿½os"
 dataframe$memoria_calculo <- "Receita de 2019+CVFS. Para 2021-2023 CVFS"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*11.14*CVFS2020
@@ -1349,7 +1356,7 @@ receita <- rbind(receita,dataframe)
 
 
 ###############################################
-#33. Receitas intra-orçamentárias - outras receitas correntes
+#33. Receitas intra-orï¿½amentï¿½rias - outras receitas correntes
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (sum(val_receita_arrecadada) - sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
  
@@ -1358,7 +1365,7 @@ string <- paste("
  WHERE
  cod_origem LIKE '79'
  AND (cod_conta_contabil LIKE '%521%' OR cod_conta_contabil LIKE '62121%' OR cod_conta_contabil LIKE '62131%' OR cod_conta_contabil LIKE '62132%')
- AND (nom_detalhamento NOT LIKE '%Recuperação%') 
+ AND (nom_detalhamento NOT LIKE '%Recuperaï¿½ï¿½o%') 
  GROUP BY cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano
  ")
 
@@ -1370,7 +1377,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "33. Receitas intra-orçamentárias - outras receitas correntes
+dataframe$nome_receita_ldo <- "33. Receitas intra-orï¿½amentï¿½rias - outras receitas correntes
 "
 dataframe$memoria_calculo <- "Receita de 2019+IPCA. Para 2021-2023 IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
@@ -1387,22 +1394,22 @@ receita <- rbind(receita,dataframe)
 #############################################################################################################
 
 
-###Atualiza os registros com receita líquida ou projeção de receita líquida para 2020
+###Atualiza os registros com receita lï¿½quida ou projeï¿½ï¿½o de receita lï¿½quida para 2020
 
 receita[which(substr(receita$cod_conta_contabil,0,3)=='621'),]$num_ano <- 2020
 
 ##
 
 ###################################################
-##Fim receitas intraorçamentárias#############
+##Fim receitas intraorï¿½amentï¿½rias#############
 ########################################################
 
 
 #########################################
-#ACRÉSCIMOS DO PRODEC NA FR 299
+#ACRï¿½SCIMOS DO PRODEC NA FR 299
 #########################################
 
-#Acréscimos PRODEC
+#Acrï¿½scimos PRODEC
 #
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
@@ -1427,10 +1434,10 @@ x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
 dataframe$nome_receita_ldo <- "24. OUTRAS RECEITAS CORRENTES"
-dataframe$memoria_calculo <- "Informações do FADESC sobre arrecadação para 2020. Para o período 2021-2023 reajustado por PIB+IPCA"
+dataframe$memoria_calculo <- "Informaï¿½ï¿½es do FADESC sobre arrecadaï¿½ï¿½o para 2020. Para o perï¿½odo 2021-2023 reajustado por PIB+IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 
-#Inicializando as informações 2020-2023 com valores zerados. A seguir são inputados os valores manualmente.
+#Inicializando as informaï¿½ï¿½es 2020-2023 com valores zerados. A seguir sï¿½o inputados os valores manualmente.
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe$projecao_receita_arrecadada_liquida2021 <- 0
 dataframe$projecao_receita_arrecadada_liquida2022 <- 0
@@ -1442,9 +1449,9 @@ receita <- rbind(receita,dataframe)
 
 #Verificar em qual natureza da receita elas se encaixam
 d <- data.frame('cod_unidade_gestora'='520091','cod_conta_contabil'='62121000000','cod_origem'='19',
- 'cod_fonte_recurso'='0299000000','cod_detalhamento'='1990992101','nom_detalhamento'='Acréscimos Contratuais PRODEC',
+ 'cod_fonte_recurso'='0299000000','cod_detalhamento'='1990992101','nom_detalhamento'='Acrï¿½scimos Contratuais PRODEC',
  'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'='24. OUTRAS RECEITAS CORRENTES',
- 'memoria_calculo'='Informações do FADESC sobre arrecadação para 2020','projecao_receita_arrecadada_liquida2020'=28962264,
+ 'memoria_calculo'='Informaï¿½ï¿½es do FADESC sobre arrecadaï¿½ï¿½o para 2020','projecao_receita_arrecadada_liquida2020'=28962264,
  'projecao_receita_arrecadada_liquida2021'=28962264*IPCA2021,
  'projecao_receita_arrecadada_liquida2022'=28962264*IPCA2021*IPCA2022,
  'projecao_receita_arrecadada_liquida2023'=28962264*IPCA2021*IPCA2022*IPCA2023,
@@ -1456,7 +1463,7 @@ receita <- rbind(receita,d)
 #RECEITAS DE CAPITAL
 #########################################
 
-#Operações de crédito
+#Operaï¿½ï¿½es de crï¿½dito
 #
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
@@ -1479,8 +1486,8 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "Operações de crédito"
-dataframe$memoria_calculo <- "Informações da DICD sobre operações de crédito contratadas para os próximos 3 anos"
+dataframe$nome_receita_ldo <- "Operaï¿½ï¿½es de crï¿½dito"
+dataframe$memoria_calculo <- "Informaï¿½ï¿½es da DICD sobre operaï¿½ï¿½es de crï¿½dito contratadas para os prï¿½ximos 3 anos"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- 0
 
@@ -1494,9 +1501,9 @@ receita <- rbind(receita,dataframe)
 
 #Verificar em qual natureza da receita elas se encaixam
 d <- data.frame('cod_unidade_gestora'='520099','cod_conta_contabil'='62121000000','cod_origem'='21',
- 'cod_fonte_recurso'='0191000000','cod_detalhamento'='2119001100','nom_detalhamento'='Espaço Fiscal',
- 'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'='Operações de crédito',
- 'memoria_calculo'='Informações da GEDIP sobre espaço fiscal do Estado','projecao_receita_arrecadada_liquida2020'=IngressosInternos2020,
+ 'cod_fonte_recurso'='0191000000','cod_detalhamento'='2119001100','nom_detalhamento'='Espaï¿½o Fiscal',
+ 'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'='Operaï¿½ï¿½es de crï¿½dito',
+ 'memoria_calculo'='Informaï¿½ï¿½es da GEDIP sobre espaï¿½o fiscal do Estado','projecao_receita_arrecadada_liquida2020'=IngressosInternos2020,
  'projecao_receita_arrecadada_liquida2021'=IngressosInternos2021,
  'projecao_receita_arrecadada_liquida2022'=IngressosInternos2022,
  'projecao_receita_arrecadada_liquida2023'=IngressosInternos2023,
@@ -1506,8 +1513,8 @@ receita <- rbind(receita,d)
 
 d <- data.frame('cod_unidade_gestora'='520099','cod_conta_contabil'='62121000000','cod_origem'='21',
  'cod_fonte_recurso'='0192000000','cod_detalhamento'='2128015100','nom_detalhamento'='BID/CAF/PROFISCO...',
- 'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'='Operações de crédito',
- 'memoria_calculo'='Informações da GEDIP','projecao_receita_arrecadada_liquida2020'=IngressosExternos2020,
+ 'num_ano'='2019','receita_arrecadada_liquida'=0,'receita_orcada_liquida'=0,'nome_receita_ldo'='Operaï¿½ï¿½es de crï¿½dito',
+ 'memoria_calculo'='Informaï¿½ï¿½es da GEDIP','projecao_receita_arrecadada_liquida2020'=IngressosExternos2020,
  'projecao_receita_arrecadada_liquida2021'=IngressosExternos2021,
  'projecao_receita_arrecadada_liquida2022'=IngressosExternos2022,
  'projecao_receita_arrecadada_liquida2023'=IngressosExternos2023,
@@ -1515,7 +1522,7 @@ d <- data.frame('cod_unidade_gestora'='520099','cod_conta_contabil'='62121000000
 
 receita <- rbind(receita,d)
 
-#Alienação de bens
+#Alienaï¿½ï¿½o de bens
 con <- odbcConnect("BoaVista",uid="bsinzato-sefaz",pwd="crisis",believeNRows=FALSE)
 
 string <- paste("
@@ -1539,7 +1546,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "Alienação de bens"
+dataframe$nome_receita_ldo <- "Alienaï¿½ï¿½o de bens"
 dataframe$memoria_calculo <- "IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -1552,7 +1559,7 @@ dataframe$ldo <- "N"
 
 receita <- rbind(receita,dataframe)
 
-#Amortização de empréstimos
+#Amortizaï¿½ï¿½o de emprï¿½stimos
 
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
@@ -1574,7 +1581,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "Amortização de empréstimos"
+dataframe$nome_receita_ldo <- "Amortizaï¿½ï¿½o de emprï¿½stimos"
 dataframe$memoria_calculo <- "IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -1587,7 +1594,7 @@ dataframe$ldo <- "N"
 
 receita <- rbind(receita,dataframe)
 
-#Transferências de capital 
+#Transferï¿½ncias de capital 
 
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
@@ -1609,7 +1616,7 @@ x <- gsub(",",".",x)
 x <- as.numeric(x)
 dataframe$receita_arrecadada_liquida <- x
 
-dataframe$nome_receita_ldo <- "Transferências de capital "
+dataframe$nome_receita_ldo <- "Transferï¿½ncias de capital "
 dataframe$memoria_calculo <- "IPCA"
 dataframe$projecao_receita_arrecadada_liquida2020 <- 0
 dataframe[which(dataframe$num_ano==2019),]$projecao_receita_arrecadada_liquida2020 <- dataframe[which(dataframe$num_ano==2019),]$receita_arrecadada_liquida*IPCA2020
@@ -1622,7 +1629,7 @@ dataframe$ldo <- "N"
 
 receita <- rbind(receita,dataframe)
 
-#Outras Receitas de Capital (Intraorçamentárias) 
+#Outras Receitas de Capital (Intraorï¿½amentï¿½rias) 
 
 string <- paste("
  SELECT  cod_unidade_gestora, cod_conta_contabil, cod_origem, cod_fonte_recurso, cod_detalhamento, nom_detalhamento, num_ano, (Sum(val_receita_arrecadada) - Sum(val_receita_arrecadada_deducao)) as receita_arrecadada_liquida, (Sum(val_receita_orcada) - Sum(val_receita_orcada_deducao)) as receita_orcada_liquida
@@ -1661,14 +1668,14 @@ receita <- rbind(receita,dataframe)
 #FIM RECEITAS DE CAPITAL
 #######################
 
-###Atualiza os registros com receita líquida ou projeção de receita líquida para 2020
+###Atualiza os registros com receita lï¿½quida ou projeï¿½ï¿½o de receita lï¿½quida para 2020
 
 receita[which(substr(receita$cod_conta_contabil,0,3)=='621'),]$num_ano <- 2020
 
 ##
 
 #################################################
-#Parametrização da RCL
+#Parametrizaï¿½ï¿½o da RCL
 #################################################
 receita$rcl <- ""
 parametrizacao <- ""
@@ -1864,13 +1871,13 @@ receita[parametrizacao,]$rcl <- "S"
 
 
 #################################################
-#Parametrização da RLI
+#Parametrizaï¿½ï¿½o da RLI
 #################################################
 
 receita$RLI <- ""
 parametrizacao <- ""
 
-codigos_receitas <- receita[,5]  #Ideal é não utilizar números e sim o nome da coluna
+codigos_receitas <- receita[,5]  #Ideal ï¿½ nï¿½o utilizar nï¿½meros e sim o nome da coluna
 parametro_rcl <- "1118021"
 sub_codigos_receitas <- substr(codigos_receitas,0,nchar(parametro_rcl))
 parametrizacao_temp <- sub_codigos_receitas %in% parametro_rcl
@@ -1977,7 +1984,7 @@ receita[parametrizacao,][which(substr(receita[parametrizacao,]$cod_conta_contabi
 
 
 ###############################################
-###FIM Parametrização RLI
+###FIM Parametrizaï¿½ï¿½o RLI
 ###################################################
 
 colnames(receita)[8]<-"valor_base"
@@ -2022,13 +2029,13 @@ if (inserirdados == "S")
 {
 
 #############################################
-#Inserção de dados no Hadoop User Experience (HUE)
+#Inserï¿½ï¿½o de dados no Hadoop User Experience (HUE)
 ########################################
 
 channel <- odbcConnect("HUE")
 sqlDrop(channel, "dior_share.ReceitaLDO2021")
 
-#Inserçao linha a linha (feito dessa forma para salvar no formato parquet e porquê utilizando a biblioteca RODBC estava gerando erros)
+#Inserï¿½ao linha a linha (feito dessa forma para salvar no formato parquet e porquï¿½ utilizando a biblioteca RODBC estava gerando erros)
 string <- ""
 for (j in 1:ncol(receita))
 {
@@ -2078,5 +2085,5 @@ table <- dbGetQuery(conn = con, "SELECT * FROM dior_share.ReceitaLDO2021")
 
 #dbGetQuery(conn = con, "INVALIDATE METADATA dior_share.ReceitaLDO2021")
 
-}#End If de inserção no Boa Vista
+}#End If de inserï¿½ï¿½o no Boa Vista
 
